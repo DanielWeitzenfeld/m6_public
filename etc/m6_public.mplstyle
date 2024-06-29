@@ -1,0 +1,7 @@
+font.family: sans-serif
+font.sans-serif: Helvetica
+axes.linewidth: 0.5
+legend.handlelength: 1
+savefig.dpi: 200
+savefig.bbox: tight
+hatch.linewidth: 0.2

@@ -31,9 +31,15 @@ class EOD:
         if end_date:
             params["to"] = end_date.strftime("%Y-%m-%d")
         r = requests.get(url, params=params)
-        df = pd.DataFrame(r.json())
-        df.date = pd.to_datetime(df.date)
-        return df
+        try:
+            df = pd.DataFrame(r.json())
+            df.date = pd.to_datetime(df.date)
+            return df
+        except requests.JSONDecodeError as e:
+            print('Could not JSON decode data from EOD.')
+            print(f'Config: {self.config}')
+            print(f'Request status code: {r.status_code}')
+            raise e
 
     def get_earnings_for_ticker(
         self,
